@@ -4,7 +4,7 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo=FALSE)
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE)
 ```
 
 Welcome to our wedding website! Our wedding is September 28, 2024 in Spicewood, TX. We are looking forward to sharing our special day with you!
