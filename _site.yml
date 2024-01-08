@@ -1,22 +1,23 @@
 name: "aaronandsteph"
-output_dir: "docs"
+output_dir: "."
 navbar:
   title: "Aaron and Stephanie's Wedding!"
   left:
-  - text: "Home"
-      href: home.Rmd
-  - text: "The Wedding"
-      href: the_wedding.Rmd
-  - text: "Meet the Wedding Party"
-      href: meet_the_wedding_party.Rmd
-  - text: "Travel Info"
-      href: travel_info.Rmd
-  - text: "Austin Recs"
-      href: austin_recs.Rmd
-  - text: "Registry"
-      href: registry.Rmd
-  - text: "RSVP"
-      href: rsvp.Rmd
+    - text: "Home"
+      href: index.html
+    - text: "The Wedding"
+      href: the_wedding.html
+    - text: "Meet the Wedding Party"
+      href: meet_the_wedding_party.html
+    - text: "Travel Info"
+      href: travel_info.html
+    - text: "Austin Recs"
+      href: austin_recs.html
+    - text: "Registry"
+      href: registry.html
+    - text: "RSVP"
+      href: rsvp.html
 output:
   html_document:
     theme: yeti
+

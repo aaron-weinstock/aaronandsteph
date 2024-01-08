@@ -1,5 +1,6 @@
 ---
 title: "Austin recs"
+output: html_document
 ---
 
 ```{r setup, include=FALSE}
