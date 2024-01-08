@@ -1,0 +1,22 @@
+name: "aaronandsteph"
+output_dir: "docs"
+navbar:
+  title: "Aaron and Stephanie's Wedding!"
+  left:
+  - text: "Home"
+      href: home.Rmd
+  - text: "The Wedding"
+      href: the_wedding.Rmd
+  - text: "Meet the Wedding Party"
+      href: meet_the_wedding_party.Rmd
+  - text: "Travel Info"
+      href: travel_info.Rmd
+  - text: "Austin Recs"
+      href: austin_recs.Rmd
+  - text: "Registry"
+      href: registry.Rmd
+  - text: "RSVP"
+      href: rsvp.Rmd
+output:
+  html_document:
+    theme: yeti

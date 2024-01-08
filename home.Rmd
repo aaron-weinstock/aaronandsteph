@@ -1,0 +1,9 @@
+---
+title: "Home"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Welcome to our wedding website! Our wedding is September 28, 2024 in Spicewood, TX. We are looking forward to sharing our special day with you!

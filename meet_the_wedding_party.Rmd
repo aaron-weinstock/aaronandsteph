@@ -1,0 +1,212 @@
+---
+title: "Meet the wedding party"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+library(dplyr)
+library(leaflet)
+library(magrittr)
+library(sf)
+library(shiny)
+library(shinydashboard)
+library(tigris)
+```
+
+```{r Config}
+places_config = list(
+  "TX" = list(
+    list(
+      name = "Aaron and Steph",
+      town = "Austin",
+      how = "Camp camp camp!",
+      potpourri = "My name is first because I am the one who wrote this"
+    )
+  ),
+  "VA" = list(
+    list(
+      name = "Sheridan",
+      town = "Fishersville",
+      how = "Let's go Hornets",
+      potpourri = "'Shugar schrub'",
+      image = "1uuJV-7sRhrCGMaMg8fLNs6QJreYH3F7z"
+    ),
+    list(
+      name = "Emily",
+      town = "Churchville",
+      how = "Babyhood",
+      potpourri = "Least likely to find an Ed, Edd, and Eddy joke funny"
+    ),
+    list(
+      name = "Justin",
+      town = "Charlottesville",
+      how = "My brother!",
+      potpourri = "If you don't address him as 'Dr.' he WILL be offended"
+    ),
+    list(
+      name = "Andrew",
+      town = "Danville",
+      how = "The Hoos",
+      potpourri = "Averages 3.4 doomsday texts about the state of UVA basketball per game"
+    )
+  ),
+  "NC" = list(
+    list(
+      name = "Grace",
+      town = "Raleigh",
+      how = "Wilson What Hornets",
+      potpourri = "'But have you ever ~had~ an Applebee's Dollarita?'"
+    )
+  ),
+  "CA" = list(
+    list(
+      name = "Bailey",
+      town = "Los Angeles",
+      how = "The Hoos",
+      potpourri = "We're like Mario and Luigi",
+      image = "1Bbu3BVBWpKPilc1eNmqo3DKTvMPrusY8"
+    )
+  ),
+  "WV" = list(
+    list(
+      name = "Rachel",
+      town = "Morgantown",
+      how = "Also babyhood",
+      potpourri = "Still not allowed to have milkshakes in Steph's car",
+      image = "1cAUdrOD0V3D_EsM2KXYoVo30_CEs-0k2"
+    )
+  ),
+  "DC" = list(
+    list(
+      name = "Elainah",
+      town = "Washington",
+      how = "The bus",
+      potpourri = "Swoop"
+    ),
+    list(
+      name = "Samora",
+      town = "Washington",
+      how = "Law clerkin",
+      potpourri = "Yes there WERE alligators in that pond!"
+    )
+  ),
+  "WA" = list(
+    list(
+      name = "Peter",
+      town = "Seattle",
+      how = "The Beavs",
+      potpourri = "Was once mistaken for Jesus in Colombia",
+      image = "119zBG7qrgM_tkVSQh5MexTu2_ieNtDGR"
+    )
+  ),
+  "OR" = list(
+    list(
+      name = "Nick",
+      town = "Corvallis",
+      how = "The Beavs",
+      potpourri = "Is a very real person with very real feelings"
+    )
+  ),
+  "CT" = list(
+    list(
+      name = "Patrick",
+      town = "Stamford",
+      how = "The Beavs",
+      potpourri = "He just drives the train"
+    )
+  ),
+  "OH" = list(
+    list(
+      name = "Noah",
+      town = "Cincinnati",
+      how = "The Hoos",
+      potpourri = "Loves Peruvians"
+    )
+  ),
+  "MA" = list(
+    list(
+      name = "Colin",
+      town = "Boston",
+      how = "The Green Dragons",
+      potpourri = "Only likeable Patriots fan in existence"
+    )
+  ),
+  "GA" = list(
+    list(
+      name = "Sam",
+      town = "Atlanta",
+      how = "The Green Dragons",
+      potpourri = "Once drove to IOWA to see me, so he must ~really like me~"
+    )
+  )
+)
+party = purrr::map2(names(places_config), places_config, function(state,people){
+  print(state)
+  cities = lapply(people, function(person){
+    person$town
+  }) %>%
+    unlist() %>%
+    unique()
+  pl = tigris::places(state = state) %>%
+    filter(NAME %in% cities) %>%
+    mutate(town = paste0(NAME, ", ", state))
+  pl_data = lapply(people, function(person){
+    pl %>%
+      filter(NAME == person$town) %>%
+      mutate(name = person$name) %>%
+      mutate(how = person$how) %>%
+      mutate(potpourri = person$potpourri) %>%
+      mutate(image = ifelse(is.null(person$image), "", person$image))
+  }) %>%
+    Reduce(rbind, .) %>%
+    dplyr::select(name, town, how, potpourri, image)
+  return(pl_data)
+}) %>%
+  Reduce(rbind, .) %>%
+  st_centroid() %>%
+  mutate(
+    label = paste0(
+      "<b>", name, "</b><br>",
+      paste0("<img src='https://drive.google.com/uc?export=view&id=", image, "', width='175px'><br>"),
+      "<b>Here from: </b>", town, "<br>",
+      "<b>How we met: </b>", how, "<br>",
+      "<b>Potpourri: </b>", potpourri
+    )
+  ) %>%
+  st_transform(4326)
+dc_overwrite = party$geometry[party$name == "Elainah"] %>%
+  st_coordinates() %>%
+  as.vector()
+party$geometry[party$name == "Elainah"] = st_point(dc_overwrite + c(0.01,0))
+party$geometry[party$name == "Samora"] = st_point(dc_overwrite + c(-0.01,0))
+```
+
+Our wedding party comes from all over the country! Scroll around the map to learn more.
+
+```{r Map}
+get_party_icon = function(df){
+  sapply(df$name, function(name){
+    if(name %in% c("Justin","Patrick","Nick","Colin","Andrew","Noah","Sam")){
+      "mars"
+    } else if(name %in% c("Rachel","Emily","Sheridan","Grace","Elainah","Bailey","Samora")){
+      "venus"
+    } else if(name == "Peter"){
+      "book"
+    } else if(name == "Aaron and Steph"){
+      "heart"
+    }
+  }) %>%
+    unname()
+}
+party_icons = awesomeIcons(
+  icon = get_party_icon(df=party),
+  library = 'fa',
+)
+leaflet(party) %>%
+  addProviderTiles("Esri.WorldStreetMap") %>%
+  addAwesomeMarkers(
+    icon = party_icons,
+    label = ~lapply(label, HTML),
+  )
+```

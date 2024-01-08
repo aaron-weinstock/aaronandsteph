@@ -1,0 +1,9 @@
+---
+title: "RSVP"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+This page will open for RSVPs once invites have been sent out (a few months before the wedding). Check back then!

@@ -1,0 +1,9 @@
+---
+title: "The Wedding"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+Information to come.

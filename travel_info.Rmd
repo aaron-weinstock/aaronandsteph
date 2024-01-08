@@ -1,0 +1,68 @@
+---
+title: "Travel info"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+library(dplyr)
+library(leaflet)
+library(magrittr)
+library(sf)
+library(shiny)
+library(shinydashboard)
+```
+
+```{r Config}
+travel = c(
+  30.20489947767981, -97.66714222969232, #AUS
+  30.42103456773607, -98.10553983419227  #Cypress Valley
+) %>%
+  matrix(
+    ncol = 2,
+    byrow = TRUE
+  ) %>%
+  data.frame() %>%
+  setNames(
+    c("Y","X")
+  ) %>%
+  mutate(
+    name = c("AUS","Cypress Valley")
+  ) %>%
+  st_as_sf(
+    coords = c("X","Y"),
+    crs = 4326
+  ) %>%
+  mutate(
+    label = paste0(
+      "<b>", name, "</b>" 
+    )
+  )
+```
+
+We expect most travelers will be flying into AUS airport, located in southeast Austin. The wedding venue is located in Spicewood, which is west of Austin and an approximately 40 minute drive from the airport.
+
+```{r Map}
+get_travel_icon = function(df){
+  sapply(df$name, function(name){
+    if(name == "AUS"){
+      "plane"
+    } else if(name == "Cypress Valley"){
+      "tree"
+    } else{
+      "hotel" #everything else will be a hotel
+    }
+  }) %>%
+    unname()
+}
+travel_icons = awesomeIcons(
+  icon = get_travel_icon(df=travel),
+  library = 'fa',
+)
+leaflet(travel) %>%
+  addProviderTiles("Esri.WorldStreetMap") %>%
+  addAwesomeMarkers(
+    icon = travel_icons,
+    label = ~lapply(label, HTML)
+  )
+```
