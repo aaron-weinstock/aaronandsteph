@@ -1,6 +1,8 @@
 ---
-title: "Travel info"
-output: html_document
+output: 
+  html_document:
+    toc: true
+    toc_float: true
 ---
 
 ```{r setup, include=FALSE}
@@ -13,6 +15,46 @@ library(sf)
 library(shiny)
 library(shinydashboard)
 ```
+
+## Airport
+
+We expect most travelers will be flying into [AUS airport](https://www.austintexas.gov/airport), located in southeast Austin. AUS serves all major US airlines. 
+
+The wedding venue is an approximately 40 minute drive west from the airport. For those looking to spend a bit of time in the city before the wedding, downtown is about a 15 minute drive.
+
+## Getting around
+
+### Rental cars
+
+All standard options for rental cars are available at the AUS airport. As an alternative, we also encourage you to check out the service [Turo](https://www.turo.com), which is essentially an "AirBnB for cars". We've found this service to be very reliable and often cheaper than renting from a company.
+
+### Uber and Lyft
+
+AUS airport is served by both Uber and Lyft. In our experience, Lyft tends to be cheaper, but we encourage rideshare users to check both.
+
+### Public transit
+
+This wouldn't be an Aaron-made website if I didn't talk about buses right?
+
+Unfortunately, public transit does not run from Austin to Spicewood; you will need to either rent a car or use rideshare. However, for those spending time in the city before or after the wedding, public transit is an option for getting around. 
+
+For those wanting to use transit from the airport, the #20 bus is about a 25 minute ride to downtown. It picks up every 30 minutes from 6:00am to 7:00am, every 15 minutes from 7:00am to 8:00pm, and every 30 minutes from 8:00pm to 11:30pm, every day of the week.
+
+For more information, or for information on other routes, check out the [CapMetro site.](https://www.capmetro.org/)
+
+## Lodging
+
+### Hotel block
+
+Still working on this... please check back for more information.
+
+### Other lodging options
+
+One reason we chose Cypress Valley to host our wedding is because of the beauty of the Texas Hill Country! This area is set in beautiful natural surroundings, and is home to some truly excellent breweries and wineries. To take full advantage of this special place, we strongly encourage you to use AirBnB, VRBO, or other services to find some of the unique stays available around our venue. Domes, cabins, and even waterfront homes on the Colorado River are possibilities in this area!
+
+## Map
+
+See the map below for an alignment of key locations.
 
 ```{r Config}
 travel = c(
@@ -41,8 +83,6 @@ travel = c(
   )
 ```
 
-We expect most travelers will be flying into AUS airport, located in southeast Austin. The wedding venue is located in Spicewood, which is west of Austin and an approximately 40 minute drive from the airport.
-
 ```{r Map}
 get_travel_icon = function(df){
   sapply(df$name, function(name){
@@ -59,11 +99,24 @@ get_travel_icon = function(df){
 travel_icons = awesomeIcons(
   icon = get_travel_icon(df=travel),
   library = 'fa',
+  iconColor = "#FFFFFF",
+  markerColor = "darkgreen"
 )
+center_pt = travel %>%
+  st_union() %>%
+  st_centroid() %>%
+  st_coordinates() %>%
+  unname() %>%
+  as.vector()
 leaflet(travel) %>%
   addProviderTiles("Esri.WorldStreetMap") %>%
   addAwesomeMarkers(
     icon = travel_icons,
     label = ~lapply(label, HTML)
+  ) %>%
+  setView(
+    lng = center_pt[1],
+    lat = center_pt[2],
+    zoom = 10
   )
 ```

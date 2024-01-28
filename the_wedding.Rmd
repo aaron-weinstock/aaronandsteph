@@ -1,10 +1,64 @@
 ---
-title: "The Wedding"
-output: html_document
+output: 
+  html_document:
+    toc: true
+    toc_float: true
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE)
 ```
 
-Information to come.
+## Wedding venue
+
+We will be getting married at the Cypress Valley Event Center in Spicewood, TX. We picked this site for its privacy and natural setting (we love trees!!). We're excited for you to enjoy the beauty of the Texas Hill Country with us!
+
+For a view of the grounds, check out the [video tour provided on the venue's website.](https://www.cypressvalley.com/tour)
+
+## Attire
+
+Officially, the attire for this wedding is "cocktail". However...
+
+...please be aware that this will be an entirely outdoor event -- the ceremony, meals, and dancing will all occur on shaded or covered patios. Though we picked a late September date to avoid the summer heat, it is still **HOT** in Texas! As such, we encourage you to dress comfortably for potentially hot weather.
+
+For ladies, floor length dresses may be a bit too warm. For gentlemen, short-sleeved button-downs or polos are great. We want everyone to be as comfortable as possible for a night of drinking and dancing!
+
+## Food
+
+Our dinner will be served buffet-style by [Stiles Switch BBQ](https://austin.stilesswitchbbq.com/) from Austin. This is some of our favorite barbecue around, and we look forward to sharing a classic Texas meal with everyone!
+
+Specific items include:
+
+- Beef brisket
+- Pork ribs
+- Pulled pork
+- Coleslaw
+- Mac and cheese
+- Pinto beans
+- Onions, pickles, bread
+
+We are also planning to have a vegetarian "meat" option, but are still on the hunt for our local favorite. Stay tuned!
+
+## Drinks
+
+Will be plentiful.
+
+## Tentative schedule
+
+**The schedule shown below is tentative and incomplete; please check back closer to the wedding date for a final times and additional details. This "tentative notice" will be removed once the schedule is finalized.**
+
+- 3:30pm: Guests arrive
+
+- 4:00pm: Ceremony begins
+
+- 4:30pm: Cocktail hour begins
+
+- 5:30pm: Cocktail hour ends; guests move to dinner seating space
+
+- 6:30pm: Dinner begins
+
+- 8:00pm: Dancing begins
+
+- 10:00pm: Party's over :(
+
+

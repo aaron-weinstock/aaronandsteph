@@ -1,5 +1,4 @@
 ---
-title: "Austin recs"
 output: html_document
 ---
 
@@ -15,16 +14,20 @@ library(shinydashboard)
 library(tidygeocoder)
 ```
 
+If you're in Austin a little before or after our wedding, these are some of our favorite spots around town for inspiration. Click the icons to learn more about each.
+
+We'll be adding places to this list as we remember old favorites (or visit new ones), so please check back for additions!
+
 ```{r Config}
 recs = c(
   "Brewery", "Blue Owl", "2400 E Cesar Chavez St #300, Austin, TX 78702", "The best bartenders and awesome sours.", "http://www.blueowlbrewing.com/",
   "Brewery", "Hold Out", "1208 W 4th St, Austin, TX 78703", "A great patio and excellent fries.", "https://www.holdoutbrewing.com/",
   "Brewery", "Jester King", "13187 Fitzhugh Rd, Austin, TX 78736", "Funky beers, hill country views, and goats!", "https://jesterkingbrewery.com/",
-  "Brewery", "St. Elmo", "440 E St Elmo Rd G-2, Austin, TX 78745", "Our favorite neighborhood spot! Next door to a whiskey distillery and winery as well.", "http://www.stelmobrewing.com/",
+  "Brewery", "St. Elmo", "440 E St Elmo Rd, Austin, TX 78745", "Our favorite neighborhood spot! Next door to a whiskey distillery and winery as well.", "http://www.stelmobrewing.com/",
   "Restaurant", "Habana", "2728 S Congress Ave, Austin, TX 78704", "Best cocktails in Austin and top-notch Caribbean food.", "http://www.habanaaustin.com/",
   "Restaurant", "Fresa's", "1703 S 1st St, Austin, TX 78704", "Beautiful outdoor seating and fantastic salsa.", "http://www.fresaschicken.com/",
-  "Restaurant", "Ramen Tatsu-ya", "1600 E 6th St, Austin, TX 78702", "Tasty ramen, fun drinks, and unexpected apps (char your own ray fin jerky!)", "http://ramen-tatsuya.com/",
-  "Restaurant", "Loro", "2115 S Lamar Blvd, Austin, TX 78704", "Unique mix of Texas barbecue and Asian flavors.", "http://loroaustin.com/",
+  "Restaurant", "Ramen Tatsu-ya", "1600 E 6th St, Austin, TX 78702", "Tasty ramen and fun drinks; multiple spots with unique spins around town", "http://ramen-tatsuya.com/",
+  "Restaurant", "Loro", "2115 S Lamar Blvd, Austin, TX 78704", "Unique mix of Texas barbecue and Asian flavors. (If you're familiar with Franklin BBQ, Loro comes from the same owners)", "http://loroaustin.com/",
   "Activity", "The Boardwalk", "1820 S Lakeshore Blvd, Austin, TX 78741", "An easy lakeside walk with scenic view of downtown; plenty of free street parking on Lakeshore.", "https://www.austintexas.gov/department/ann-and-roy-butler-hike-and-bike-trail",
   "Activity", "Austin Nature and Science Center", "2389 Stratford Dr, Austin, TX 78746", "A free mini zoo and wildlife preserve.", "http://www.austintexas.gov/department/austin-nature-and-science-center"
 ) %>%
@@ -45,7 +48,7 @@ recs = c(
       "<ul>",
       "<li><b>Address: </b>", address, "</li>",
       "<li><b>Why go: </b>", why, "</li>",
-      "<li><b>Website: </b>", url, "</li>",
+      "<li><b>Website: </b><a href='", url, "'>", url, "</a></li>",
       "</ul>"
     )
   )
@@ -57,10 +60,10 @@ recs = recs %>%
     coords = c("long","lat"),
     crs = 4326
   )
+# Selmo doesnt geocode
 ```
-If you're in Austin a little before or after our wedding, here are some of our favorite spots around town.
 
-```{r Map}
+```{r Map, out.width = '100%'}
 get_recs_icon = function(df){
   sapply(df$category, function(category){
     if(category == "Brewery"){
@@ -68,20 +71,33 @@ get_recs_icon = function(df){
     } else if(category == "Restaurant"){
       "cutlery"
     } else if(category == "Activity"){
-      "person-hiking"
+      "child"
     }
   }) %>%
     unname()
 }
 recs_icons = awesomeIcons(
   icon = get_recs_icon(df=recs),
-  library = 'fa',
+  library = "fa",
+  iconColor = "#FFFFFF",
+  markerColor = "darkgreen"
 )
+center_pt = recs %>%
+  st_union() %>%
+  st_centroid() %>%
+  st_coordinates() %>%
+  unname() %>%
+  as.vector()
 leaflet(recs) %>%
   addProviderTiles("Esri.WorldStreetMap") %>%
   addAwesomeMarkers(
     icon = recs_icons,
     label = ~lapply(label, HTML),
     popup = ~lapply(popup, HTML)
+  ) %>%
+  setView(
+    lng = center_pt[1],
+    lat = center_pt[2],
+    zoom = 10
   )
 ```

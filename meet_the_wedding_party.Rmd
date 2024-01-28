@@ -43,7 +43,7 @@ places_config = list(
       name = "Justin",
       town = "Charlottesville",
       how = "My brother!",
-      potpourri = "If you don't address him as 'Dr.' he WILL be offended"
+      potpourri = "World's preeminent bluffer -- just ask those kids on Yak"
     ),
     list(
       name = "Andrew",
@@ -97,7 +97,7 @@ places_config = list(
       name = "Peter",
       town = "Seattle",
       how = "The Beavs",
-      potpourri = "Was once mistaken for Jesus in Colombia",
+      potpourri = "Thinks the name 'Be Free Mary Jane' is (and I quote) ~beautiful~",
       image = "119zBG7qrgM_tkVSQh5MexTu2_ieNtDGR"
     )
   ),
@@ -148,7 +148,7 @@ party = purrr::map2(names(places_config), places_config, function(state,people){
   }) %>%
     unlist() %>%
     unique()
-  pl = tigris::places(state = state) %>%
+  pl = tigris::places(state = state, progress_bar = FALSE) %>%
     filter(NAME %in% cities) %>%
     mutate(town = paste0(NAME, ", ", state))
   pl_data = lapply(people, function(person){
@@ -182,7 +182,7 @@ party$geometry[party$name == "Elainah"] = st_point(dc_overwrite + c(0.01,0))
 party$geometry[party$name == "Samora"] = st_point(dc_overwrite + c(-0.01,0))
 ```
 
-Our wedding party comes from all over the country! Scroll around the map to learn more.
+Our wedding party comes from all over the country! Scroll around the map to learn more. And a big thanks to all our friends who are joining us as groomsmen and bridesmaids on our special day -- we hope we picked flattering photos of everyone!
 
 ```{r Map}
 get_party_icon = function(df){
@@ -202,6 +202,8 @@ get_party_icon = function(df){
 party_icons = awesomeIcons(
   icon = get_party_icon(df=party),
   library = 'fa',
+  iconColor = "#FFFFFF",
+  markerColor = "darkgreen"
 )
 leaflet(party) %>%
   addProviderTiles("Esri.WorldStreetMap") %>%

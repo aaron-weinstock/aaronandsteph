@@ -11,7 +11,7 @@
 
 
 
-<title>The Wedding</title>
+<title>the_wedding.knit</title>
 
 <script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -29,6 +29,9 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -219,6 +222,69 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
 
 </head>
 
@@ -226,6 +292,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -275,15 +351,78 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">The Wedding</h1>
 
 </div>
 
 
-<p>Information to come.</p>
+<div id="wedding-venue" class="section level2">
+<h2>Wedding venue</h2>
+<p>We will be getting married at the Cypress Valley Event Center in
+Spicewood, TX. We picked this site for its privacy and natural setting
+(we love trees!!). We’re excited for you to enjoy the beauty of the
+Texas Hill Country with us!</p>
+<p>For a view of the grounds, check out the <a
+href="https://www.cypressvalley.com/tour">video tour provided on the
+venue’s website.</a></p>
+</div>
+<div id="attire" class="section level2">
+<h2>Attire</h2>
+<p>Officially, the attire for this wedding is “cocktail”. However…</p>
+<p>…please be aware that this will be an entirely outdoor event – the
+ceremony, meals, and dancing will all occur on shaded or covered patios.
+Though we picked a late September date to avoid the summer heat, it is
+still <strong>HOT</strong> in Texas! As such, we encourage you to dress
+comfortably for potentially hot weather.</p>
+<p>For ladies, floor length dresses may be a bit too warm. For
+gentlemen, short-sleeved button-downs or polos are great. We want
+everyone to be as comfortable as possible for a night of drinking and
+dancing!</p>
+</div>
+<div id="food" class="section level2">
+<h2>Food</h2>
+<p>Our dinner will be served buffet-style by <a
+href="https://austin.stilesswitchbbq.com/">Stiles Switch BBQ</a> from
+Austin. This is some of our favorite barbecue around, and we look
+forward to sharing a classic Texas meal with everyone!</p>
+<p>Specific items include:</p>
+<ul>
+<li>Beef brisket</li>
+<li>Pork ribs</li>
+<li>Pulled pork</li>
+<li>Coleslaw</li>
+<li>Mac and cheese</li>
+<li>Pinto beans</li>
+<li>Onions, pickles, bread</li>
+</ul>
+<p>We are also planning to have a vegetarian “meat” option, but are
+still on the hunt for our local favorite. Stay tuned!</p>
+</div>
+<div id="drinks" class="section level2">
+<h2>Drinks</h2>
+<p>Will be plentiful.</p>
+</div>
+<div id="tentative-schedule" class="section level2">
+<h2>Tentative schedule</h2>
+<p><strong>The schedule shown below is tentative and incomplete; please
+check back closer to the wedding date for a final times and additional
+details. This “tentative notice” will be removed once the schedule is
+finalized.</strong></p>
+<ul>
+<li><p>3:30pm: Guests arrive</p></li>
+<li><p>4:00pm: Ceremony begins</p></li>
+<li><p>4:30pm: Cocktail hour begins</p></li>
+<li><p>5:30pm: Cocktail hour ends; guests move to dinner seating
+space</p></li>
+<li><p>6:30pm: Dinner begins</p></li>
+<li><p>8:00pm: Dancing begins</p></li>
+<li><p>10:00pm: Party’s over :(</p></li>
+</ul>
+</div>
 
 
 
+</div>
+</div>
 
 </div>
 
@@ -316,6 +455,35 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
