@@ -1,5 +1,4 @@
 ---
-title: "Meet the wedding party"
 output: html_document
 ---
 
@@ -12,6 +11,7 @@ library(magrittr)
 library(sf)
 library(shiny)
 library(shinydashboard)
+library(stringr)
 library(tigris)
 ```
 
@@ -168,7 +168,8 @@ party = purrr::map2(names(places_config), places_config, function(state,people){
   mutate(
     label = paste0(
       "<b>", name, "</b><br>",
-      paste0("<img src='https://drive.google.com/uc?export=view&id=", image, "', width='175px'><br>"),
+      #paste0("<img src='https://drive.google.com/uc?export=view&id=", image, "', width='175px'><br>"),
+      paste0("<img src='https://github.com/aaron-weinstock/wedding-site-photos/blob/main/party/", str_to_lower(str_replace_all(name," ","")), ".jpg?raw=true', width='175px'><br>"),
       "<b>Here from: </b>", town, "<br>",
       "<b>How we met: </b>", how, "<br>",
       "<b>Potpourri: </b>", potpourri
@@ -180,11 +181,16 @@ dc_overwrite = party$geometry[party$name == "Elainah"] %>%
   as.vector()
 party$geometry[party$name == "Elainah"] = st_point(dc_overwrite + c(0.01,0))
 party$geometry[party$name == "Samora"] = st_point(dc_overwrite + c(-0.01,0))
+party$label[party$name == "Justin"] = str_replace(
+  party$label[party$name == "Justin"],
+  "https://github.com/aaron-weinstock/wedding-site-photos/blob/main/party/justin.jpg\\?raw=true",
+  "https://i.imgflip.com/6eiuat.png"
+) 
 ```
 
 Our wedding party comes from all over the country! Scroll around the map to learn more. And a big thanks to all our friends who are joining us as groomsmen and bridesmaids on our special day -- we hope we picked flattering photos of everyone!
 
-```{r Map}
+```{r Map, out.width = '100%'}
 get_party_icon = function(df){
   sapply(df$name, function(name){
     if(name %in% c("Justin","Patrick","Nick","Colin","Andrew","Noah","Sam")){
@@ -211,4 +217,8 @@ leaflet(party) %>%
     icon = party_icons,
     label = ~lapply(label, HTML),
   )
+```
+
+```{r}
+party$label[1] = "<b>Aaron and Steph</b><br><img src='images/as/as_01.JPG', width='175px'><br><b>Here from: </b>Austin, TX<br><b>How we met: </b>Camp camp camp!<br><b>Potpourri: </b>My name is first because I am the one who wrote this"
 ```

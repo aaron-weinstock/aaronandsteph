@@ -83,7 +83,7 @@ travel = c(
   )
 ```
 
-```{r Map}
+```{r Map, out.width = '100%'}
 get_travel_icon = function(df){
   sapply(df$name, function(name){
     if(name == "AUS"){

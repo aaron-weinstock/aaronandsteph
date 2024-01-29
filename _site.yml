@@ -17,7 +17,11 @@ navbar:
       href: registry.html
     - text: "RSVP"
       href: rsvp.html
+    - text: "Gallery"
+      href: gallery.html
 output:
   html_document:
     theme: yeti
+    css: [base.css]
+
 
