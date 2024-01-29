@@ -8,19 +8,19 @@ knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE)
 
 Here are some of our favorite shots from the engagement photos we took at Cypress Valley. Special thanks to our lovely and talented friend Emi for the beautiful shots!
 
-<center><img src="images/as/as_02.JPG"></center>
+<center><img src="images/as/as_02.JPG" width="400px"></center>
 <br>
-<center><img src="images/as/as_03.JPG"></center>
+<center><img src="images/as/as_03.JPG" width="400px"></center>
 <br>
-<center><img src="images/as/as_04.JPG"></center>
+<center><img src="images/as/as_04.JPG" width="400px"></center>
 <br>
-<center><img src="images/as/as_05.JPG"></center>
+<center><img src="images/as/as_05.JPG" width="400px"></center>
 <br>
-<center><img src="images/as/as_06.JPG"></center>
+<center><img src="images/as/as_06.JPG" width="400px"></center>
 <br>
-<center><img src="images/as/as_07.JPG"></center>
+<center><img src="images/as/as_07.JPG" width="400px"></center>
 <br>
-<center><img src="images/as/as_08.JPG"></center>
+<center><img src="images/as/as_08.JPG" width="400px"></center>
 <br>
-<center><img src="images/as/as_09.JPG"></center>
+<center><img src="images/as/as_09.JPG" width="400px"></center>
 <br>

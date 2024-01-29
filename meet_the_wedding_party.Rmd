@@ -218,7 +218,3 @@ leaflet(party) %>%
     label = ~lapply(label, HTML),
   )
 ```
-
-```{r}
-party$label[1] = "<b>Aaron and Steph</b><br><img src='images/as/as_01.JPG', width='175px'><br><b>Here from: </b>Austin, TX<br><b>How we met: </b>Camp camp camp!<br><b>Potpourri: </b>My name is first because I am the one who wrote this"
-```
