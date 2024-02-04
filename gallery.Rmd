@@ -6,7 +6,7 @@ output: html_document
 knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE)
 ```
 
-Here are some of our favorite shots from the engagement photos we took at Cypress Valley. Special thanks to our lovely and talented friend Emi for the beautiful shots!
+Here are some of our favorite shots from the engagement photos we took at Cypress Valley.
 
 <center><img src="images/as/as_02.JPG" width="400px"></center>
 <br>
