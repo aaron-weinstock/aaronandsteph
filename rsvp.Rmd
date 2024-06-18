@@ -6,6 +6,13 @@ output: html_document
 knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE)
 ```
 
-This page will open for RSVPs once invites have been sent out (a few months before the wedding). Check back then!
+Unfortunately I'm not good enough at web dev to have properly embedded the RSVP page, so you'll have to go to a separate page :( please follow the link below.
+
+When you get to the site, enter the password found on your RSVP to respond for all members of your household. **Please note that the passwords are case-sensitive!**
+
+As a final request, due to issues with the web host, **we ask that you close the RSVP page as soon as your response is confirmed as submitted.** This will help us keep the site active for everyone else! Thank you!
+
+RSVP here: [https://aaron-weinstock.shinyapps.io/rsvp/]( https://aaron-weinstock.shinyapps.io/rsvp/)
+
 
 
