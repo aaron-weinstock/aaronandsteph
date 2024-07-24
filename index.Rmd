@@ -8,7 +8,13 @@ knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE)
 
 Welcome to our wedding website! Our wedding is September 28, 2024 in Spicewood, TX. We are looking forward to sharing our special day with you!
 
-We encourage you to check back on this site as our wedding date approaches. We will be adding and updating information as we finalize details.
+We've recently added some info on hotels and transportation to the site -- for additional details, see the "Travel Info" tab. Here's a summary of what's new:
+
+- No area hotels offer a discounted block rate, so there is no hotel block. If you want to stay in a hotel, we've got suggestions on the "Travel Info" tab.
+
+- Because there is no central hotel block, we are unable to provide a shuttle service to/from the venue. If you have questions about arranging transportation, let us know and we'll do our best to help.
+
+- If you intend to use rideshare to travel to the venue, we encourage you to schedule your ride in advance, especially for your ride back to your lodging. The venue is in a rural area, and on-demand late-night rides may be hard to come by.
 
 <center><img src="images/as/as_01.JPG" width="400px"></center>
 
